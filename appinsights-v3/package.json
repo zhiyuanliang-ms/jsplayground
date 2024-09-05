@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@hapi/hapi": "^21.3.10",
+    "@opentelemetry/sdk-node": "^0.53.0",
+    "@types/node": "^22.5.1",
+    "applicationinsights": "^3.2.2",
+    "express": "^4.19.2"
+  }
+}

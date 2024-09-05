@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "applicationinsights": "^2.9.6",
+    "express": "^4.19.2"
+  }
+}

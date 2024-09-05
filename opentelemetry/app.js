@@ -1,6 +1,4 @@
-const opentelemetry = require('@opentelemetry/api');
-const tracer = opentelemetry.trace.getTracer('dice-server', '0.1.0');
-
+const otel = require("./instrumentation.js")
 
 const express = require('express');
 const { rollTheDice } = require('./dice.js');
