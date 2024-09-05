@@ -27,7 +27,11 @@ appInsights.defaultClient.addTelemetryProcessor(attachTargetingId);
 app.get('/', (req, res) => {
 
   const context = appInsights.getCorrelationContext();
-  context.customProperties.setProperty("TargetingId", "123abc")
+  context.customProperties.setProperty("TargetingId", "12457abc")
+  // console.log(context);
+  // console.log(context.customProperties)
+
+  appInsights.defaultClient.trackEvent({name: "testHello"})
 
   res.send(`hello`);
 });

@@ -12,27 +12,30 @@ function attachTargetingId(id) {
     span.setAttribute("TargetingId", id)
 }
 
-//////////////////// express server //////////////////////
-const express = require('express');
-const app = express();
-const port = 5000;
+const Hapi = require('@hapi/hapi');
 
-app.get('/', (req, res) => {
+const init = async () => {
 
-    
-    attachTargetingId("123456");
+    // Create a Hapi server instance
+    const server = Hapi.server({
+        port: 3000,
+        host: 'localhost'
+    });
 
-    appInsights.defaultClient.trackEvent({name: "hellov3"});
-    res.send(`hello world`);
-});
+    // Define a simple route
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+            attachTargetingId("123456abcdefg")
+            return { message: 'Hello, Hapi!' };
+        }
+    });
 
-app.get('/test', (req, res) => {
-    attachTargetingId("123456");
+    // Start the server
+    await server.start();
+    console.log('Server running on %s', server.info.uri);
+};
 
-    appInsights.defaultClient.trackEvent({name: "testv3"});
-    res.send(`test`);
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+// Initialize the server
+init();

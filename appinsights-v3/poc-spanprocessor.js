@@ -16,9 +16,19 @@ class TestSpanProcessor {
       return Promise.resolve();
     }
     onStart(span, _context) {
-        span.setAttribute("TargetingId", "123456");
+        // const context = appInsights.getCorrelationContext();
+        // console.log("onStart", context?.customProperties.id)
+
+        
+
+        // span.setAttribute("TargetingId", "123456");
     }
     onEnd(span) {
+        const context = appInsights.getCorrelationContext();
+        console.log("onEnd", context)
+        console.log("onEnd", context?.customProperties.id)
+
+        span.setAttribute("TargetingId", "test123456");
     }
     shutdown() {
       return Promise.resolve();
@@ -29,7 +39,11 @@ class TestLogProcessor {
     constructor() {
     }
     onEmit(record) {
-        record.setAttribute("TargetingId", "123456");
+        const context = appInsights.getCorrelationContext();
+        console.log("onEmit", context)
+        console.log("onEmit", context?.customProperties.id)
+
+        // record.setAttribute("TargetingId", "123456");
     }
     shutdown() {
         return Promise.resolve();
@@ -52,6 +66,9 @@ const app = express();
 const port = 5000;
 
 app.get('/', (req, res) => {
+    const context = appInsights.getCorrelationContext();
+    context.customProperties.id = "123"
+    console.log("get", context)
     appInsights.defaultClient.trackEvent({name: "hello"})
     res.send(`hello world`);
 });

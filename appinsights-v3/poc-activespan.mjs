@@ -10,12 +10,12 @@ app.get('/', (req, res) => {
     
     attachTargetingId();
 
-    trackEvent("hello", "123456abc");
+    trackEvent("hellov3mjs", "123456abc");
     res.send(`hello world`);
 });
 
 app.get('/test', (req, res) => {
-    trackEvent("test", "123456abc");
+    trackEvent("testv3mjs", "123456abc");
     res.send(`test`);
 });
 
