@@ -405,9 +405,6 @@ types/
 # dotenv
 .env
 
-# npm pack
-*.tgz
-
 # examples
 examples/package-lock.json
 
