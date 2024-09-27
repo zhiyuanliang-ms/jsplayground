@@ -36,10 +36,6 @@ app.get('/', (req, res) => {
   res.send(`hello`);
 });
 
-app.get('/test', (req, res) => {
-  res.send(`test`);
-});
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

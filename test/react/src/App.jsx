@@ -80,7 +80,7 @@ function App() {
   const handleClick = () => {
     setButtonDisabled(true);
     window.setTimeout( () => {
-      trackEvent(appInsights, userId, {name : "Button Click"}, { "Count": count + 1});
+      trackEvent(appInsights, userId, {name : "Button Click"}, { "Count": count + 1 });
       setCount(count + 1);
       setButtonDisabled(false);
     }, 500);
