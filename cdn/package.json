@@ -1,0 +1,12 @@
+{
+
+    "dependencies": {
+
+        "@azure/app-configuration": "1.5.0",
+
+        "@azure/identity": "^4.4.1"
+
+    }
+
+}
+
