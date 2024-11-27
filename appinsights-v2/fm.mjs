@@ -1,31 +1,28 @@
-import appInsights from "applicationinsights";
+import { defaultClient } from "applicationinsights";
 
-let TargetingId;
-
-export function SetTargetingId(targetingId) {
-    TargetingId = targetingId;
-} 
-
-export function GetTargetingId() {
-    return TargetingId;
-}
-
-const attachTargetingId = (envelope) => {
-    envelope.data.baseData.properties["TargetingId1"] = TargetingId; // work
-    // envelope.data["TargetingId2"] = TargetingId; // not work
-    // envelope.data.TargetingId = TargetingId; // not work
-}
-
-export function InitializeTelemetry(connectionString) {
-    appInsights.setup(connectionString)
-        .setAutoCollectRequests(true)
-        .setSendLiveMetrics(true)
-        .start();
-
-    const client = appInsights.defaultClient;
-    client.addTelemetryProcessor(attachTargetingId);
-
-    return (event) => {
-        client.trackEvent({name: event.name});
+export function publishTelemetry(event) {
+    if (defaultClient === undefined) {
+        console.warn(`Application Insights default client is not found.`);
+        return;
     }
+
+    const eventProperties = {
+        "FeatureName": event.feature ? event.feature.id : "",
+        "Enabled": event.enabled.toString(),
+        // Ensure targetingId is string so that it will be placed in customDimensions
+        "TargetingId": event.targetingId ? event.targetingId.toString() : "",
+        "Variant": event.variant ? event.variant.name : "",
+        "VariantAssignmentReason": event.variantAssignmentReason,
+    };
+
+    const metadata = event.feature?.telemetry?.metadata;
+    if (metadata) {
+        for (const key in metadata) {
+            if (!(key in eventProperties)) {
+                eventProperties[key] = metadata[key];
+            }
+        }
+    }
+
+    defaultClient.trackEvent({ name: "FeatureEvaluation", properties: eventProperties});
 }

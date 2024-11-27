@@ -5,7 +5,7 @@ import { trackEvent, createTelemetryPublisher } from "@microsoft/feature-managem
 import './App.css'
 
 const appInsights = new ApplicationInsights({ config: {
-  connectionString: "InstrumentationKey=f02d78f6-0f63-44ba-a6c8-a46bf4814b93;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=cbe807ce-9938-42e2-a934-c51b1d0d4cbb"
+  connectionString: "InstrumentationKey=4d6ce866-937d-4ab4-8b1d-a9d4da485b64;IngestionEndpoint=https://eastasia-0.in.applicationinsights.azure.com/;LiveEndpoint=https://eastasia.livediagnostics.monitor.azure.com/;ApplicationId=9e20d3f8-2192-428e-b12f-77f8d601c7ba"
 }});
 appInsights.loadAppInsights();
 

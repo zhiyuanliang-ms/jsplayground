@@ -5,15 +5,19 @@ import './App.css'
 
 import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 
-const connectionString = "InstrumentationKey=f02d78f6-0f63-44ba-a6c8-a46bf4814b93;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=cbe807ce-9938-42e2-a934-c51b1d0d4cbb";
+const connectionString = "InstrumentationKey=1ed14b85-2501-4762-a20e-1b8339da0cd5;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=a4b55d1c-c833-4ca9-869e-e4bf8d1ecd4e";
 function App() {
   useEffect(() => {
     
     const appInsights = new ApplicationInsights({ config: {
       connectionString: connectionString
     }});
+    console.log(appInsights);
     appInsights.loadAppInsights();
     appInsights.trackPageView();
+    console.log(appInsights);
+    appInsights.trackEvent({name: "YES"})
+    console.log(appInsights.trackEvent);
     appInsights.addTelemetryInitializer((envelope) => {
       envelope.data["TargetingId"] = '123456';
     })

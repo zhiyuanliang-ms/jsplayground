@@ -1,0 +1,7 @@
+{
+    "type": "module",
+    "dependencies": {
+        "@azure/app-configuration": "1.7.0",
+        "selfsigned": "^2.4.1"
+    }
+}
