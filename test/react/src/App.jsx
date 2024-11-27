@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ApplicationInsights } from "@microsoft/applicationinsights-web"
 import { ConfigurationObjectFeatureFlagProvider, FeatureManager } from "@microsoft/feature-management"
+import { load } from "@azure/app-configuration-provider";
 import { trackEvent, createTelemetryPublisher } from "@microsoft/feature-management-applicationinsights-browser"
 import './App.css'
 
@@ -71,6 +72,15 @@ function App() {
     if (variant) {
       setFontsize(variant.configuration);
     }
+
+    const df_cs = "Endpoint=https://zhiyuanliang-test.azconfig-test.io;Id=c0EH;Secret=45T6yvK386A2UfVUFjNDGHDgTGzpsbWOWlt5Pvj5s9orLAS9jsGLJQQJ99AJADLArgHeHiRoAAACAZACTX4k";
+
+    const cs = "Endpoint=https://appconfig-lzy.azconfig.io;Id=lP1r;Secret=AahHLa8mVzRqiDEeMQ4PuxOeu6cT9a410tKWtXlqV2Uxf7ccKDJoJQQJ99AEACYeBjFJhn2FAAACAZACxsaz";
+
+    const settings = await load(df_cs);
+
+    console.log(settings)
+
   };
 
   useEffect(() => {
@@ -80,7 +90,7 @@ function App() {
   const handleClick = () => {
     setButtonDisabled(true);
     window.setTimeout( () => {
-      trackEvent(appInsights, userId, {name : "Button Click"}, { "Count": count + 1});
+      trackEvent(appInsights, userId, {name : "Button Click"}, { "Count": count + 1 });
       setCount(count + 1);
       setButtonDisabled(false);
     }, 500);

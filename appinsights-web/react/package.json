@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@microsoft/applicationinsights-web": "^3.3.1",
+    "@microsoft/feature-management": "file:./microsoft-feature-management-1.0.0-preview.tgz",
+    "@microsoft/feature-management-applicationinsights-browser": "file:./microsoft-feature-management-applicationinsights-browser-1.0.0-preview.tgz",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
